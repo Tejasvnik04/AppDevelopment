@@ -1,0 +1,44 @@
+.add{
+    margin-top: -3cm;
+    margin-right: 25cm;
+}
+
+#addform{
+    border: 1px solid;
+    border-color: black;
+    background-color: rgba(60, 227, 239, 0.623);
+}
+
+label[for="name"] {
+    padding-right: 10ch;
+  }
+label[for="bloodGroup"] {
+    padding-right: 5ch;
+  }
+label[for="mobileNumber"] {
+    padding-right: 3ch;
+  }
+label[for="address"] {
+    padding-right: 9ch;
+  }
+label[for="age"] {
+    padding-right: 12ch;
+  }
+
+.list{
+    margin-top: -10.5cm;
+    margin-left: 15cm;
+    height:fit-content;
+    width: 24cm;
+    border: 1px solid;
+    border-color: black;
+    background-color: rgba(60, 227, 239, 0.623);
+}
+
+th{
+    padding: 1cm;
+}
+
+#table{
+    margin-top: -1cm;
+}
