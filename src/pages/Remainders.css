@@ -1,0 +1,61 @@
+/* Add this CSS to a separate CSS file, e.g., settings.css */
+
+
+  
+  .welcome-container {
+    text-align: center;
+    
+  }
+  
+  .plant-box-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust as needed for your layout */
+  }
+  
+  .plant-box {
+    
+    margin-bottom: 20px; /* Adjust the margin between boxes */
+    border: 1px solid #ccc;
+    padding: 100px;
+    text-align: center;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+  }
+  
+  .plant-box:hover {
+    transform: scale(1.05); /* Adjust the scale factor for hover effect */
+  }
+  
+  .plant-box img {
+    max-width: 30%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .plant-box h3 {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .plant-box p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  
+  .plant-box button {
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: #de7ba1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+  }
+  
+  .plant-box button:hover {
+    background-color: #0056b3;
+  }
+  
