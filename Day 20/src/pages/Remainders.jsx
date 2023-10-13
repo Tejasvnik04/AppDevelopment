@@ -1,0 +1,93 @@
+import React, { useState, useEffect } from 'react';
+import Layout from '../components/Layout';
+import { useSelector, useDispatch } from 'react-redux';
+import { deletePlants, addPlants } from '../redux/userSlice';
+import img from "./img.png";
+import "./Remainders.css"
+import axios from 'axios';
+
+function PlantBox({ plant, onDelete, onAddReminder }) {
+  return (
+    <div className='plant-box'>
+      <img src={img} alt={plant.plantName} />
+      <h3>{plant.plantName}</h3>
+      <p>Type: {plant.plantType}</p>
+      <p>Room: {plant.room}</p>
+      <p>Watering Necessity: {plant.water}</p>
+      <p>Sunlight Necessity: {plant.sunlight}</p>
+      <button onClick={() => onDelete(plant.id)}>Delete</button>
+      <button onClick={() => onAddReminder(plant.id)}>Add Reminder</button>
+    </div>
+  );
+}
+
+function Remainders() {
+  const [plants, setPlants] = useState([]);
+  const dispatch = useDispatch();
+
+  async function fetchPlants() {
+    try {
+      const response = await axios.get('http://localhost:8080/api/plants/get', {
+        headers: {
+          'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3ZWVyQGdtYWlsLmNvbSIsImlhdCI6MTY5Njk5OTMxNSwiZXhwIjoxNjk3MDg1NzE1fQ.WdHbiovvOCAevoO64w6ZQVCvqcHP3f8muOVQLyWtoUw',
+          'Content-Type': 'application/json',
+        },
+      });
+      setPlants(response.data); // Assuming your API returns an array of plant data
+      // console.log(plants)
+    } catch (error) {
+      console.error('Error fetching plants:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchPlants();
+  }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/api/plants/delete?id=${id}`, {
+        headers: {
+          'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaGYiLCJpYXQiOjE2OTY5MTU3NDcsImV4cCI6MTY5NzAwMjE0N30.FTQSFRPheR1EwrK1-di6dCz5RvR6wXfU6R0qDgVr3-s',
+          'Content-Type': 'application/json',
+        },
+      });
+      fetchPlants();
+      dispatch(deletePlants({ id }));
+    } catch (error) {
+      console.error('Error deleting plant:', error);
+    }
+  };
+
+  const handleAddReminder = async (id) => {
+    // You can implement the logic to add reminders here
+    // You may want to open a modal or navigate to a new page for reminder creation
+    console.log(`Adding a reminder for plant with ID ${id}`);
+  };
+
+  return (
+    <>
+      <Layout />
+      <div className='main-wrapper'>
+        <div className='welcome-container' style={{ zIndex: -1 }}>
+          <h2>Admin Dashboard</h2>
+          <div className="plant-box-container">
+            {plants.map((plant, index) => (
+              <PlantBox
+                key={plant.id}
+                plant={plant}
+                onDelete={handleDelete}
+                onAddReminder={handleAddReminder}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      <footer />
+    </>
+  );
+}
+
+export default Remainders;
